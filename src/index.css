@@ -1,111 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --background: 30 33% 95%;
+  --foreground: 0 0% 14%;
+  --card: 35 30% 92%;
+  --card-foreground: 0 0% 14%;
+  --primary: 0 60% 30%;
+  --primary-foreground: 30 33% 95%;
+  --secondary: 355 65% 33%;
+  --secondary-foreground: 30 33% 95%;
+  --muted: 30 20% 88%;
+  --muted-foreground: 0 0% 35%;
+  --accent: 358 63% 28%;
+  --accent-foreground: 30 33% 95%;
+  --border: 30 15% 82%;
+  --ring: 0 60% 30%;
+  --radius: 0.5rem;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Word search highlight colors */
+  --word-about: 0 65% 35%;
+  --word-projects: 355 70% 42%;
+  --word-contact: 20 75% 45%;
+  --word-skills: 345 60% 38%;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* Glow effects */
+  --glow-about: 0 0 12px hsl(0 65% 35% / 0.5), 0 0 25px hsl(0 65% 35% / 0.3);
+  --glow-projects: 0 0 12px hsl(355 70% 42% / 0.5), 0 0 25px hsl(355 70% 42% / 0.3);
+  --glow-contact: 0 0 12px hsl(20 75% 45% / 0.5), 0 0 25px hsl(20 75% 45% / 0.3);
+  --glow-skills: 0 0 12px hsl(345 60% 38% / 0.5), 0 0 25px hsl(345 60% 38% / 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+}
+
+/* ─── Letter Cell ─────────────────────────────────────── */
+.letter-cell {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 48px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  transition: all 0.18s ease;
+  user-select: none;
+  position: relative;
   border-radius: 4px;
-  color: var(--text-h);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+@media (max-width: 480px) {
+  .letter-cell {
+    width: 28px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+}
+
+.letter-cell.word-letter {
+  cursor: pointer;
+}
+
+.letter-cell.word-letter:hover,
+.letter-cell.word-letter.highlighted {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+/* Animated underline */
+.letter-cell.word-letter::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 70%;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+
+.letter-cell.word-letter.highlighted::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ─── Word Colors ─────────────────────────────────────── */
+.word-about {
+  color: hsl(var(--word-about));
+}
+.word-about.highlighted {
+  text-shadow: var(--glow-about);
+  background-color: hsl(var(--word-about) / 0.1);
+}
+
+.word-projects {
+  color: hsl(var(--word-projects));
+}
+.word-projects.highlighted {
+  text-shadow: var(--glow-projects);
+  background-color: hsl(var(--word-projects) / 0.1);
+}
+
+.word-contact {
+  color: hsl(var(--word-contact));
+}
+.word-contact.highlighted {
+  text-shadow: var(--glow-contact);
+  background-color: hsl(var(--word-contact) / 0.1);
+}
+
+.word-skills {
+  color: hsl(var(--word-skills));
+}
+.word-skills.highlighted {
+  text-shadow: var(--glow-skills);
+  background-color: hsl(var(--word-skills) / 0.1);
+}
+
+/* ─── Layout ──────────────────────────────────────────── */
+.page-container {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-color: hsl(var(--background));
+}
+
+.page-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.notepad-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) * 2);
+  padding: 2rem;
+  box-shadow:
+    0 1px 2px hsl(0 0% 0% / 0.04),
+    0 4px 12px hsl(0 0% 0% / 0.06),
+    0 12px 32px hsl(0 0% 0% / 0.04);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 0.15s ease;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover {
+  color: hsl(var(--foreground));
+}
+
+/* ─── Grid Background ─────────────────────────────────── */
+.grid-background {
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Animations ──────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-20px) translateX(10px); }
+  66% { transform: translateY(10px) translateX(-10px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease forwards;
+}
+
+.animate-float {
+  animation: floatOrb 8s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatOrb 10s ease-in-out infinite 2s;
+}
+
+.animate-float-slow {
+  animation: floatOrb 12s ease-in-out infinite 4s;
+}
+
+/* ─── Page transition wrapper ─────────────────────────── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
